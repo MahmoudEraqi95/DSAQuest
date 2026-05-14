@@ -54,5 +54,27 @@ fun evalRPN(tokens: Array<String>): Int {
     return stack.pop()
 }
 
+fun exclusiveTime(n: Int, logs: List<String>): IntArray {
+    val stack = Stack<Int>()
+    val ans = IntArray(n)
+    var currentTime = 0
+    for ( i in logs){
+        val parts = i.split(":")
+        val funID = parts[0].toInt()
+        val process = parts[1]
+        val time = parts[2].toInt()
 
+        if (process == "start"){
+            if (stack.isNotEmpty()) {
+                ans[stack.last()] += time - currentTime
+            }
+            stack.push(funID)
+            currentTime = time;
+        }else{
+            ans[stack.removeLast()] += time - currentTime +1
+            currentTime = time+1
+        }
+    }
+    return ans
+}
 
