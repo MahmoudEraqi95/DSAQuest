@@ -13,3 +13,22 @@ fun finalPrices(prices: IntArray): IntArray {
     }
     return ans
 }
+
+fun dailyTemperatures(temperatures: IntArray): IntArray {
+    val ans = temperatures.clone()
+    val isUpdated = BooleanArray(ans.size)
+    val stack = Stack<Int>()
+    for(i in temperatures.indices){
+
+        while (stack.isNotEmpty() && temperatures[i]>temperatures[stack.last()]){
+            ans[stack.last()] = i - stack.last()
+            isUpdated[stack.pop()] = true
+        }
+        stack.add(i)
+    }
+    for (i in ans.indices){
+        if (ans[i] == temperatures[i] && !isUpdated[i])
+            ans[i] = 0
+    }
+    return ans
+}
