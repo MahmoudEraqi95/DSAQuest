@@ -32,3 +32,25 @@ fun dailyTemperatures(temperatures: IntArray): IntArray {
     }
     return ans
 }
+
+fun largestRectangleArea(heights: IntArray): Int {
+    var max = 0
+    val area = heights.clone() + 0
+    val stack = Stack<Int>()
+    for (i in heights.indices){
+
+        while (stack.isNotEmpty() && area[stack.last()]> area[i]){
+            val height = area[stack.pop()]
+            val width = if (stack.isEmpty()){
+                i
+            }else{
+                i -stack.size - 1
+            }
+            max = maxOf(max, height * width)
+        }
+        stack.push(i)
+
+    }
+    return max
+
+}
