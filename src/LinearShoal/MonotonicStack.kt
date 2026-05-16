@@ -1,3 +1,5 @@
+package LinearShoal
+
 import java.util.Stack
 
 fun finalPrices(prices: IntArray): IntArray {

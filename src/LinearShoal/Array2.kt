@@ -1,3 +1,5 @@
+package LinearShoal
+
 import kotlin.math.abs
 
 fun findErrorNums(nums: IntArray): IntArray {
