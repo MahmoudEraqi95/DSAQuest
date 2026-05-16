@@ -2,6 +2,7 @@ package SequenceValley
 
 import java.util.LinkedList
 import java.util.Queue
+import java.util.Stack
 
 fun countStudents(students: IntArray, sandwiches: IntArray): Int {
     val studentsQueue: Queue<Int> = LinkedList<Int>(students.toList())
@@ -54,3 +55,40 @@ fun timeRequiredToBuy(tickets: IntArray, k: Int): Int {
     }
     return counter
 }
+
+class MyQueue() {
+    val inStack = Stack<Int>()
+    val outStack = Stack<Int>()
+    fun push(x: Int) {
+        inStack.push(x)
+        while (outStack.isNotEmpty()){
+            inStack.push(outStack.pop())
+        }
+        while (inStack.isNotEmpty()){
+            outStack.push(inStack.pop())
+        }
+    }
+
+    fun pop(): Int {
+
+        return outStack.pop()
+    }
+
+    fun peek(): Int {
+        return outStack.peek()
+    }
+
+    fun empty(): Boolean {
+        return outStack.size == 0
+    }
+
+}
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * var obj = MyQueue()
+ * obj.push(x)
+ * var param_2 = obj.pop()
+ * var param_3 = obj.peek()
+ * var param_4 = obj.empty()
+ */
