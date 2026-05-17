@@ -37,4 +37,25 @@ fun detectCapitalUse(word: String): Boolean {
         checkAllCap(word)
     }
 }
+fun licenseKeyFormatting(s: String, k: Int): String {
+    val upperString = s.uppercase().replace("-","")
+    if(upperString.length<=k)
+        return upperString
+    var firstGroupLength = upperString.length % k
+    val finalString = StringBuilder(upperString)
+    if (firstGroupLength != 0){
+        finalString.insert(firstGroupLength, "-")
+        firstGroupLength++
+    }
+    var sLength = finalString.length
+    var i = firstGroupLength+k
+    while (i <sLength ){
+        println(i)
+        finalString.insert(i , "-")
+        sLength ++
+        i = i+k+1
+    }
+    return finalString.toString()
+
+}
 
