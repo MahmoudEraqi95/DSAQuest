@@ -1,8 +1,8 @@
 package SequenceValley
 
 import java.util.PriorityQueue
+import kotlin.comparisons.compareByDescending
 import kotlin.math.abs
-import kotlin.math.min
 
 fun lastStoneWeight(stones: IntArray): Int {
     val heap = PriorityQueue<Int>(compareByDescending { it  })
@@ -40,4 +40,27 @@ fun kSmallestPairs(nums1: IntArray, nums2: IntArray, k: Int): List<List<Int>> {
 
     }
     return ans
+}
+
+fun isPossible(target: IntArray): Boolean {
+    val maxHeap = PriorityQueue<Long>(compareByDescending { it } )
+    maxHeap.addAll(target.toList().map { it.toLong() })
+    var totalSum = 0L
+    for (i in target){
+        totalSum += i
+    }
+    val n = target.size
+
+    while (true){
+        val largest = maxHeap.poll()
+        val remaining = totalSum - largest
+        if (largest == 1L || remaining == 1L)
+            return true
+
+        if (remaining == 0L || largest < remaining || largest%remaining == 0L)
+            return false
+        val previous = largest - remaining
+        totalSum = previous + remaining
+        maxHeap.add(totalSum)
+    }
 }
