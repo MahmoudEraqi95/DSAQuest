@@ -44,3 +44,13 @@ fun rotateString(s: String, goal: String): Boolean {
     return false
 
 }
+
+fun repeatedStringMatch(a: String, b: String): Int {
+    val minReps = (b.length + a.length - 1) / a.length
+
+    for (reps in minReps..minReps + 1) {
+        if (a.repeat(reps).contains(b)) return reps
+    }
+
+    return -1
+}
