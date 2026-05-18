@@ -28,3 +28,19 @@ fun repeatedSubstringPattern(s: String): Boolean {
 
     }
 }
+fun rotateString(s: String, goal: String): Boolean {
+    val n = s.length
+    var i = 0
+    var newS = s
+    while(i <n){
+        newS += "${newS[0]}"
+        newS = newS.substring(1,  n+1)
+
+
+        if (newS == goal)
+            return true
+        i++
+    }
+    return false
+
+}
