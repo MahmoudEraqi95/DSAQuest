@@ -21,5 +21,14 @@ fun reformatDate(date: String): String {
 
     return "$year-$finalMonthString-$finalDayString"
 
+}
 
+fun maxRepeating(sequence: String, word: String): Int {
+    var k = 0
+    var wordCopy = word
+    while (sequence.contains(wordCopy)){
+        wordCopy += word
+        k++
+    }
+    return k
 }
