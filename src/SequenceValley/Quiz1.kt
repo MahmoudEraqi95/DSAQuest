@@ -1,8 +1,6 @@
 package SequenceValley
 
 import java.util.PriorityQueue
-import java.util.Stack
-import kotlin.math.min
 
 
 fun eatenApples(apples: IntArray, days: IntArray): Int {
