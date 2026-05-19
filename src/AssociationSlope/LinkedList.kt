@@ -1,5 +1,7 @@
 package AssociationSlope
 
+import java.util.Stack
+
 class ListNode(var `val`: Int) {
     var next: ListNode? = null
 }
@@ -24,18 +26,34 @@ fun oddEvenList(head: ListNode?): ListNode? {
     var evenList = ListNode(0)
     var newEvenList = evenList
     var newHead = head
-    while (newHead != null){
+    while (newHead != null) {
         newOddList.next = newHead
         newOddList = newOddList.next!!
-        if(newHead.next != null) {
+        if (newHead.next != null) {
             newEvenList.next = newHead.next
             newEvenList = newEvenList.next!!
             newHead = newHead.next?.next
-        }else{
+        } else {
             break
         }
     }
     newEvenList.next = null
     newOddList.next = evenList.next
     return oddList.next
+}
+
+fun reverseList(head: ListNode?): ListNode? {
+    var newHead = head
+    val stack = Stack<Int>()
+    while (newHead != null){
+        stack.push(newHead.`val`)
+        newHead = newHead.next
+    }
+    val newList = ListNode(0)
+    var modifyingList = newList
+    while (stack.isNotEmpty()){
+        modifyingList.next = ListNode(stack.pop())
+        modifyingList = modifyingList.next!!
+    }
+    return newList.next
 }
