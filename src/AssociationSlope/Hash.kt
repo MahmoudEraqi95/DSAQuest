@@ -47,3 +47,11 @@ fun copyRandomList(node: Node?): Node? {
     return map[node]
 
 }
+
+fun firstMissingPositive(nums: IntArray): Int {
+    val set = HashSet<Int>(nums.toSet())
+    for(i in 1..set.size+1)
+        if (!set.contains(i))
+            return i
+    return -1
+}
