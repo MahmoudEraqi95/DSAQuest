@@ -55,3 +55,19 @@ fun firstMissingPositive(nums: IntArray): Int {
             return i
     return -1
 }
+fun firstMissingPositiveSmartSolution(nums: IntArray): Int {
+    for (i in nums.indices){
+        if (nums[i] in 1..nums.size-1 && nums[i] != nums[nums[i] -1]){
+            val rightIndex = nums[i] -1
+            val temp = nums[i]
+            nums[i] = nums[rightIndex]
+            nums[rightIndex] = temp
+
+        }
+    }
+    for(i in nums.indices){
+        if (nums[i] != i + 1)
+            return i+1
+    }
+    return nums.size+1
+}
