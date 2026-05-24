@@ -34,3 +34,36 @@ fun minSubarray(nums: IntArray, p: Int): Int {
 
     return if (minLen < nums.size) minLen else -1
 }
+
+fun waysToMakeFair(nums: IntArray): Int {
+
+    var evenSum = nums.filterIndexed { i, e -> (i % 2) == 0 }.sum()
+    var oddSum = nums.filterIndexed { i, e -> (i % 2) != 0 }.sum()
+    var prefixEven = 0
+    var prefixOdd = 0
+    var result = 0
+    for (i in nums.indices){
+        var suffixEven = evenSum - prefixEven
+        var suffixOdd = oddSum - prefixOdd
+
+        if (i % 2 == 0){
+            suffixEven -=  nums[i]
+        }else{
+            suffixOdd -= nums[i]
+        }
+
+
+        val evenSumWithoutCurrentNo = prefixEven + suffixOdd
+        val oddWithoutCurrentNo = prefixOdd + suffixEven
+
+
+        if (evenSumWithoutCurrentNo == oddWithoutCurrentNo)
+            result++
+        if (i % 2 == 0){
+            prefixEven +=  nums[i]
+        }else{
+            prefixOdd += nums[i]
+        }
+    }
+    return result
+}
