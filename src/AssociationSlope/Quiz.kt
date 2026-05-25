@@ -26,6 +26,19 @@ fun nextLargerNodes(head: ListNode?): IntArray {
     return result
 
 }
-//fun checkSubarraySum(nums: IntArray, k: Int): Boolean {
-//
-//}
+fun checkSubarraySum(nums: IntArray, k: Int): Boolean {
+    val remIndex = mutableMapOf<Int, Int>()
+    remIndex[0] = -1
+    var prefixSum = 0
+    for (i in nums.indices){
+        prefixSum += nums[i]
+        val rem = prefixSum % k
+        if (remIndex.contains(rem)){
+            if (i - remIndex[rem]!! >= 2)
+                return true
+        }else{
+            remIndex[rem] = i
+        }
+    }
+    return false
+}
