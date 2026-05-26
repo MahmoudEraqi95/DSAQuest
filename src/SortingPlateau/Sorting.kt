@@ -21,3 +21,24 @@ fun minimumAbsDifference(arr: IntArray): List<List<Int>> {
     return result
 
 }
+
+fun reductionOperations(nums: IntArray): Int {
+    var result = 0
+    nums.sort()
+    val map = mutableMapOf<Int, Int>()
+    for(i in nums){
+        if (map.contains(i)){
+            val value = map[i]!!
+            map[i] =  value + 1
+        }else{
+            map[i] = 1
+        }
+    }
+    val newNums = nums.distinct()
+
+    for (i in newNums.indices){
+        //println("I: $i MapValue: ${map[newNums[i]]}")
+        result += i * map[newNums[i]]!!
+    }
+    return result
+}
