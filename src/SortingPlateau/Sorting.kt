@@ -42,3 +42,23 @@ fun reductionOperations(nums: IntArray): Int {
     }
     return result
 }
+fun merge(intervals: Array<IntArray>): Array<IntArray> {
+
+    intervals.sortBy { it[0] }
+
+    val merged = mutableListOf<IntArray>()
+
+    for (interval in intervals) {
+        when {
+
+            merged.isEmpty() || interval[0] > merged.last()[1] ->
+                merged.add(interval)
+
+
+            else ->
+                merged.last()[1] = maxOf(merged.last()[1], interval[1])
+        }
+    }
+
+    return merged.toTypedArray()
+}
