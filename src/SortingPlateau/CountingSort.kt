@@ -1,5 +1,7 @@
 package SortingPlateau
 
+import java.util.PriorityQueue
+
 fun findKthLargest(nums: IntArray, k: Int): Int {
     var max = nums.max()
     var min = nums.min()
@@ -14,4 +16,15 @@ fun findKthLargest(nums: IntArray, k: Int): Int {
             return i+min
     }
     return -1
+}
+
+fun sortArray(nums: IntArray): IntArray {
+    val pq = PriorityQueue<Int>(nums.toList())
+    val result = IntArray(nums.size)
+    var i = 0
+    while (pq.isNotEmpty()){
+        result[i] = pq.poll()
+        i++
+    }
+    return result
 }
