@@ -1,5 +1,7 @@
 package SortingPlateau
 
+import kotlin.math.sqrt
+
 
 fun peakIndexInMountainArray(arr: IntArray): Int {
     fun binarySearch(left: Int, right: Int): Int {
@@ -35,4 +37,23 @@ fun search(nums: IntArray, target: Int): Int {
         return -1 //shouldn't happen
     }
     return binarySearchWithTarget(0, nums.size - 1)
+}
+fun judgeSquareSum(c: Int): Boolean {
+
+    var right = sqrt(c.toDouble()).toLong()
+    var left = 1
+    while (left>=right){
+        val leftSquared = left * left
+        val rightSquared = right* right
+        val res = leftSquared + rightSquared
+        if (res == c.toLong())
+            return true
+        if (res > c.toDouble()){
+            left--
+        }else{
+            right++
+        }
+    }
+    return false
+
 }
