@@ -43,3 +43,15 @@ fun build(postorder: IntArray, leftIndex:Int, rightIndex:Int):TreeNode?{
     rootNode.left = build(postorder, leftIndex, rootIndex-1)
     return rootNode;
 }
+fun reversePairs(nums: IntArray): Int {
+    var result = 0
+    for( i in nums.indices){
+        val currentI = nums[i]
+        for (j in i+1..nums.size-1){
+            val doubleOfJ: Long = 2* nums[j].toLong()
+            if (currentI> doubleOfJ)
+                result++
+        }
+    }
+    return result
+}
