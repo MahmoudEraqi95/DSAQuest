@@ -1,19 +1,41 @@
 package SortingPlateau
 
-fun findRightInterval(intervals: Array<IntArray>): IntArray {
-    val result = IntArray(intervals.size)
-    result.fill(-1)
-    for (i in intervals.indices){
-        val current = intervals[i]
-        var minJ = Int.MAX_VALUE
-        for (j in intervals.indices){
+fun minDays(bloomDay: IntArray, m: Int, k: Int): Int {
 
-            if (current[1] <= intervals[j][0] && intervals[j][0]<minJ) {
-                result[i] = j
-                minJ = intervals[j][0]
-                //println("I is $i J is $j result[i] is ${result[i]}")
-            }
+    if (m * k > bloomDay.size)
+        return -1
+    var left = bloomDay.min()
+    var right = bloomDay.max()
+
+    while (left < right) {
+        val mid = left + (right - left) / 2
+        if (binarySearch(mid, bloomDay, m, k)) {
+            right = mid
+        } else {
+            left = mid +1
         }
     }
-    return result
+    return left
+
+}
+
+fun binarySearch(day: Int, bloomDay: IntArray, m: Int, k: Int): Boolean {
+
+    var flowers = 0
+    var bouqs = 0
+    for (i in bloomDay) {
+
+        if (i <= day) {
+            flowers++
+            if (flowers == k) {
+                bouqs++
+                if (bouqs == m)
+                    return true
+                flowers = 0
+            }
+        } else {
+            flowers = 0
+        }
+    }
+    return false
 }
